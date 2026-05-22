@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Hệ thống kho Đại đội 17</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- NÚT MENU -->
+
+<div class="nutmenu"
+
+onclick="moMenu()">
+
+☰
+
+</div>
+
+
+
+<!-- MENU -->
+
+<div class="menu-left"
+
+id="menu">
+
+
+
+    <div class="dong"
+
+    onclick="dongMenu()">
+
+        ×
+
+    </div>
+
+
+
+    <h2>MENU</h2>
+
+<p onclick="trangChu()">
+
+    Trang chủ
+
+</p>
+
+
+
+<p onclick="hienKhoHuanLuyen()">
+
+    Kho huấn luyện
+
+</p>
+
+
+
+<p onclick="hienKhoHauCan()">
+
+    Kho hậu cần
+
+</p>
+
+
+
+<p onclick="thongKe()">
+
+    Thống kê
+
+</p>
+
+</div>
+
+    <!-- ĐĂNG NHẬP -->
+
+    <div id="login">
+
+        <img src="logo.png"
+
+class="logo">
+
+
+
+<h1>HỆ THỐNG KHO ĐẠI ĐỘI 17</h1>
+
+        <input type="text"
+        id="ten"
+
+        placeholder="Nhập tên của bạn">
+
+        <br>
+
+        <button onclick="dangNhap()">
+
+            Đăng nhập
+
+        </button>
+
+    </div>
+
+
+
+    <!-- TRANG CHÍNH -->
+
+    <div id="main">
+
+        <h2 id="chaomung"></h2>
+        <h3 id="dongho"></h3>
+
+        <h1>HỆ THỐNG KHO ĐẠI ĐỘI 17</h1>
+<button onclick="dangXuat()">
+
+    Đăng xuất
+
+</button>
+
+
+        <div class="container">
+
+
+
+            <!-- KHO HUẤN LUYỆN -->
+
+            <div class="box xanh"
+
+            onclick="hienKhoHuanLuyen()">
+
+                KHO HUẤN LUYỆN
+
+            </div>
+
+
+
+            <!-- KHO HẬU CẦN -->
+
+            <div class="box do"
+
+            onclick="hienKhoHauCan()">
+
+                KHO HẬU CẦN
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- KHO HUẤN LUYỆN -->
+
+    <div id="khohuanluyen">
+
+    <h2>KHO HUẤN LUYỆN</h2>
+    <input type="text"
+
+id="timkiemhl"
+
+placeholder="Tìm vật chất kho huấn luyện"
+
+onkeyup="timKiemHL()">
+
+    <table>
+
+        <tr>
+            <th>Tên vật chất</th>
+            <th>Năm</th>
+            <th>Số lượng</th>
+        </tr>
+
+        <tr><td>Nhà bạt</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mặt nạ phòng hóa</td><td>2018</td><td>06</td></tr>
+        <tr><td>Bia số 6b</td><td>2024</td><td>03</td></tr>
+        <tr><td>Bia số 7d</td><td>2024</td><td>03</td></tr>
+        <tr><td>Bia số 8b</td><td>2024</td><td>03</td></tr>
+        <tr><td>Bia số 16</td><td>2024</td><td>03</td></tr>
+        <tr><td>Bia số 7c</td><td>2024</td><td>02</td></tr>
+        <tr><td>Bia số 8c</td><td>2024</td><td>02</td></tr>
+        <tr><td>Bia số 6</td><td>2024</td><td>06</td></tr>
+        <tr><td>Bia số 10</td><td>2024</td><td>06</td></tr>
+        <tr><td>Bia số 9</td><td>2024</td><td>02</td></tr>
+        <tr><td>Bia đâm lê</td><td>2024</td><td>02</td></tr>
+        <tr><td>Chùy</td><td>2024</td><td>02</td></tr>
+        <tr><td>Máy dò mìn</td><td>2018</td><td>08</td></tr>
+        <tr><td>Áo phao</td><td>2023</td><td>02</td></tr>
+        <tr><td>Phao bơi</td><td>2023</td><td>02</td></tr>
+        <tr><td>Lượng nổ 400g nhựa</td><td>2023</td><td>40</td></tr>
+        <tr><td>Lượng nổ 400g gỗ</td><td>2023</td><td>50</td></tr>
+        <tr><td>Lượng nổ 200g nhựa</td><td>2023</td><td>40</td></tr>
+        <tr><td>Lượng nổ 200g gỗ</td><td>2023</td><td>90</td></tr>
+        <tr><td>Lượng nổ 50g</td><td>2023</td><td>40</td></tr>
+        <tr><td>Lượng nổ 25g</td><td>2023</td><td>50</td></tr>
+        <tr><td>Nẹp lượng nổ dài</td><td>2023</td><td>10</td></tr>
+        <tr><td>Nẹp lượng nổ khối</td><td>2023</td><td>06</td></tr>
+        <tr><td>Mô hình cầu quân sự</td><td>2023</td><td>02</td></tr>
+        <tr><td>Mô hình chông</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mô hình công sự SCH</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mô hình công sự chữ A</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mô hình hàng rào</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mô hình bãi nổ thủ công</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mô hình bãi nổ điện</td><td>2024</td><td>01</td></tr>
+        <tr><td>Mô hình bếp Hoàng Cầm</td><td>2023</td><td>01</td></tr>
+        <tr><td>Kíp huấn luyện</td><td>2023</td><td>50</td></tr>
+        <tr><td>Nụ xùy huấn luyện</td><td>2023</td><td>50</td></tr>
+        <tr><td>Bộc phá dài</td><td>2023</td><td>09</td></tr>
+        <tr><td>Bộc phá khối</td><td>2023</td><td>06</td></tr>
+        <tr><td>Mìn TM-46</td><td>2023</td><td>06</td></tr>
+        <tr><td>Mìn TM-57</td><td>2023</td><td>07</td></tr>
+        <tr><td>Mìn TM-62M</td><td>2023</td><td>02</td></tr>
+        <tr><td>Mìn M15</td><td>2023</td><td>10</td></tr>
+        <tr><td>Mìn POMZ-2</td><td>2023</td><td>03</td></tr>
+        <tr><td>Mìn OZM-72</td><td>2023</td><td>20</td></tr>
+        <tr><td>Mìn K-58</td><td>2023</td><td>06</td></tr>
+        <tr><td>Biển báo nguy hiểm</td><td>2023</td><td>04</td></tr>
+<tr><td>Cọc tiêu bãi nổ</td><td>2023</td><td>20</td></tr>
+<tr><td>Dây cháy chậm</td><td>2023</td><td>15</td></tr>
+<tr><td>Dây điện điểm hỏa</td><td>2023</td><td>12</td></tr>
+<tr><td>Kìm cắt dây</td><td>2023</td><td>08</td></tr>
+<tr><td>Đèn tín hiệu</td><td>2023</td><td>06</td></tr>
+<tr><td>Cờ chỉ huy</td><td>2023</td><td>10</td></tr>
+<tr><td>Sào dò mìn</td><td>2023</td><td>04</td></tr>
+<tr><td>Bảng chỉ tiêu</td><td>2023</td><td>05</td></tr>
+<tr><td>Giá treo mô hình</td><td>2023</td><td>03</td></tr>
+<tr><td>Đèn huấn luyện đêm</td><td>2024</td><td>02</td></tr>
+        <tr><td>Mìn K69</td><td>2023</td><td>01</td></tr>
+        <tr><td>Mìn M16A2</td><td>2023</td><td>10</td></tr>
+        <tr><td>Mìn DH-10</td><td>2024</td><td>04</td></tr>
+        <tr><td>Mìn MOH50</td><td>2024</td><td>01</td></tr>
+        <tr><td>Túi đựng mìn</td><td>2024</td><td>12</td></tr>
+        <tr><td>Máng bố trí mìn</td><td>2023</td><td>04</td></tr>
+        <tr><td>Guồng bố trí mìn</td><td>2023</td><td>04</td></tr>
+        <tr><td>Biển đánh dấu cửa mở</td><td>2023</td><td>06</td></tr>
+        <tr><td>Thuốn</td><td>2023</td><td>54</td></tr>
+        <tr><td>Cọc tuyến</td><td>2023</td><td>16</td></tr>
+        <tr><td>Cọc tiếp đầu</td><td>2023</td><td>39</td></tr>
+        <tr><td>Cọc gia lông</td><td>2023</td><td>23</td></tr>
+        <tr><td>Thước 3m</td><td>2023</td><td>06</td></tr>
+        <tr><td>Thước vuông góc</td><td>2023</td><td>06</td></tr>
+        <tr><td>Thước đo độ</td><td>2023</td><td>06</td></tr>
+        <tr><td>Thước đo độ dốc</td><td>2023</td><td>02</td></tr>
+        <tr><td>Cọc dấu</td><td>2023</td><td>100</td></tr>
+        <tr><td>Dùi đục</td><td>2023</td><td>10</td></tr>
+        <tr><td>Đà kê</td><td>2023</td><td>12</td></tr>
+        <tr><td>Vồ tay</td><td>2023</td><td>06</td></tr>
+        <tr><td>Biển bảng bãi nổ</td><td>2023</td><td>05</td></tr>
+        <tr><td>Giá dựng bia</td><td>2023</td><td>06</td></tr>
+        <tr><td>Giá tập điều lệnh</td><td>2023</td><td>09</td></tr>
+        <tr><td>Máy phát điều khiển nổ từ xa ĐKN 9.5</td><td>2024</td><td>02</td></tr>
+
+    </table>
+
+</div>
+
+
+    <!-- KHO HẬU CẦN -->
+
+    <div id="khohaucan">
+
+    <h2>KHO HẬU CẦN</h2>
+    <input type="text"
+
+id="timkiemhc"
+
+placeholder="Tìm vật chất kho hậu cần"
+
+onkeyup="timKiemHC()">
+
+    <table>
+
+        <tr>
+            <th>Tên vật chất</th>
+            <th>Năm</th>
+            <th>Số lượng</th>
+        </tr>
+
+        <tr><td>Cuốc CB</td><td>2023</td><td>12</td></tr>
+        <tr><td>Xẻng CB</td><td>2023</td><td>19</td></tr>
+        <tr><td>Xẻng BB</td><td>2023</td><td>18</td></tr>
+        <tr><td>Cuốc BB</td><td>2023</td><td>08</td></tr>
+        <tr><td>Xà beng</td><td>2023</td><td>06</td></tr>
+        <tr><td>Đầm chân voi</td><td>2023</td><td>10</td></tr>
+        <tr><td>Búa 1 - 4kg</td><td>2023</td><td>04</td></tr>
+        <tr><td>Thuổng</td><td>2023</td><td>10</td></tr>
+        <tr><td>Cưa tay</td><td>2023</td><td>06</td></tr>
+        <tr><td>Bao đựng cưa tay</td><td>2023</td><td>06</td></tr>
+        <tr><td>Dao quắm</td><td>2023</td><td>14</td></tr>
+        <tr><td>Dao tông</td><td>2023</td><td>13</td></tr>
+        <tr><td>Bao đựng dao tông</td><td>2023</td><td>06</td></tr>
+        <tr><td>Máy đo xa</td><td>2023</td><td>01</td></tr>
+        <tr><td>Bộ sửa chữa QCCT</td><td>2023</td><td>01</td></tr>
+        <tr><td>Kìm bóp kíp</td><td>2023</td><td>40</td></tr>
+        <tr><td>Dao cắt dây cháy chậm</td><td>2023</td><td>29</td></tr>
+        <tr><td>Thuốn dò mìn</td><td>2023</td><td>98</td></tr>
+        <tr><td>Cưa cá mập</td><td>2022</td><td>06</td></tr>
+        <tr><td>Tăng</td><td>2023</td><td>65</td></tr>
+        <tr><td>Võng</td><td>2023</td><td>65</td></tr>
+        <tr><td>Dây võng</td><td>2023</td><td>65</td></tr>
+        <tr><td>Bao tượng</td><td>2023</td><td>65</td></tr>
+        <tr><td>Đai lưng</td><td>2023</td><td>22</td></tr>
+        <tr><td>Bình tông</td><td>2023</td><td>65</td></tr>
+        <tr><td>Vỏ bình tông</td><td>2023</td><td>108</td></tr>
+        <tr><td>Túi cơm</td><td>2023</td><td>22</td></tr>
+        <tr><td>Bạt bếp</td><td>2023</td><td>02</td></tr>
+        <tr><td>Mũ A2</td><td>2023</td><td>30</td></tr>
+        <tr><td>Rumine</td><td>2023</td><td>01</td></tr>
+        <tr><td>Bạt nằm</td><td>2023</td><td>22</td></tr>
+        <tr><td>Gàu múc canh</td><td>2023</td><td>02</td></tr>
+        <tr><td>Gàu 1 lít</td><td>2023</td><td>01</td></tr>
+        <tr><td>Vợt rau</td><td>2023</td><td>02</td></tr>
+        <tr><td>Xẻng đảo cơm</td><td>2023</td><td>02</td></tr>
+        <tr><td>Môi 0,5l</td><td>2023</td><td>02</td></tr>
+        <tr><td>Soong B20</td><td>2023</td><td>01</td></tr>
+        <tr><td>Soong Ø60</td><td>2023</td><td>01</td></tr>
+        <tr><td>Soong Ø29</td><td>2023</td><td>17</td></tr>
+        <tr><td>Nắp 2 ngăn</td><td>2023</td><td>15</td></tr>
+        <tr><td>Vật chất huấn luyện đêm</td><td>2024</td><td>02</td></tr>
+
+    </table>
+
+</div>
+
+
+<!-- THỐNG KÊ -->
+
+<div id="thongke">
+
+    <h2>THỐNG KÊ VẬT CHẤT</h2>
+
+
+
+    <div class="tkbox">
+
+        <h3>
+
+            Kho huấn luyện
+
+        </h3>
+
+        <p id="tkhl"></p>
+
+    </div>
+
+
+
+    <div class="tkbox">
+
+        <h3>
+
+            Kho hậu cần
+
+        </h3>
+
+        <p id="tkhc"></p>
+
+    </div>
+
+
+
+    <div class="tkbox">
+
+        <h3>
+
+            Tổng toàn bộ
+
+        </h3>
+
+        <p id="tktong"></p>
+
+    </div>
+
+</div>
+<!-- FOOTER -->
+
+<div class="footer">
+
+    © Đại đội 17 - Năm 2026
+
+</div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
