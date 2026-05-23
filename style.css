@@ -470,27 +470,65 @@ th{
 
 
 
-/* MENU TITLE */
+/* MENU */
 
-.menu-left h2{
+.menu-left{
 
-    margin-top:30px;
+    position:fixed;
 
-    text-align:center;
+    top:0;
+
+    left:-260px;
+
+
+
+    width:250px;
+
+    height:100%;
+
+
+
+    background:
+
+    rgba(0,0,0,0.9);
+
+
+
+    backdrop-filter:blur(10px);
+
+
+
+    padding-top:80px;
+
+
+
+    transition:0.3s;
+
+
+
+    z-index:9999;
 
 }
 
 
 
-/* ITEM */
+/* MENU ITEM */
 
 .menu-left p{
 
-    padding:18px;
+    color:white;
+
+    padding:18px 25px;
 
     cursor:pointer;
 
-    transition:0.3s;
+    font-size:18px;
+
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,0.1);
 
 }
 
@@ -500,56 +538,9 @@ th{
 
 .menu-left p:hover{
 
-    background:rgba(255,255,255,0.1);
+    background:
 
-}
-
-
-
-/* NÚT ĐÓNG */
-
-.dong{
-
-    text-align:right;
-
-    padding:10px 20px;
-
-    font-size:35px;
-
-    cursor:pointer;
-
-}
-/* MOBILE */
-
-@media(max-width:768px){
-
-
-
-    #main{
-
-        margin-left:0;
-
-        padding:20px;
-
-    }
-
-
-
-    .box{
-
-        width:100%;
-
-    }
-
-
-
-    #khohuanluyen,
-
-    #khohaucan{
-
-        margin:20px;
-
-    }
+    rgba(255,255,255,0.1);
 
 }
 /* LOGO */
