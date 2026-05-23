@@ -671,3 +671,144 @@ th{
     margin-top:50px;
 
 }
+/* MOBILE */
+
+@media screen and (max-width:768px){
+
+
+
+    /* LOGIN */
+
+    #login{
+
+        width:90%;
+
+        margin-top:80px;
+
+        padding:25px;
+
+    }
+
+
+
+    #login h1{
+
+        font-size:24px;
+
+    }
+
+
+
+    input{
+
+        font-size:16px;
+
+    }
+
+
+
+    button{
+
+        font-size:16px;
+
+    }
+
+
+
+    /* MAIN */
+
+    #main{
+
+        margin-left:0;
+
+        padding:20px;
+
+    }
+
+
+
+    /* BOX */
+
+    .container{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+
+
+    .box{
+
+        width:100%;
+
+        max-width:320px;
+
+        height:170px;
+
+        font-size:24px;
+
+    }
+
+
+
+    /* MENU */
+
+    .menu-left{
+
+        width:220px;
+
+    }
+
+
+
+    /* KHO */
+
+    #khohuanluyen,
+
+    #khohaucan,
+
+    #thongke{
+
+        margin:20px 10px;
+
+    }
+
+
+
+    /* TABLE */
+
+    table{
+
+        font-size:14px;
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+
+    }
+
+
+
+    th, td{
+
+        padding:10px;
+
+    }
+
+
+
+    /* FOOTER */
+
+    .footer{
+
+        font-size:14px;
+
+        padding:15px;
+
+    }
+
+}
