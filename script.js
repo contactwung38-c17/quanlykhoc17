@@ -37,8 +37,6 @@ document.getElementById("main")
 
 /* HIỆN MENU */
 
-document.getElementById("menu")
-.style.display = "block";
 
 
     /* ẨN KHO */
@@ -249,14 +247,9 @@ function timKiemHC(){
     }
 
 }
-//* MỞ MENU */
+/* MỞ MENU */
 
 function moMenu(){
-
-
-
-    document.getElementById("menu")
-    .style.display = "block";
 
 
 
@@ -502,7 +495,7 @@ window.onload = function(){
 
         }
 
-    }
+    }dongMenu();
 
 
 
@@ -520,10 +513,6 @@ window.onload = function(){
         document.getElementById("main")
         .style.display = "none";
 
-
-
-        document.getElementById("menu")
-        .style.display = "none";
 
 
 
