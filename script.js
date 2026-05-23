@@ -50,6 +50,11 @@ function hienKhoHuanLuyen(){
 
 
 
+    document.getElementById("main")
+    .style.display = "none";
+
+
+
     document.getElementById("khohuanluyen")
     .style.display = "block";
 
@@ -57,6 +62,15 @@ function hienKhoHuanLuyen(){
 
     document.getElementById("khohaucan")
     .style.display = "none";
+
+
+
+    document.getElementById("thongke")
+    .style.display = "none";
+
+
+
+    dongMenu();
 
 }
 
@@ -68,13 +82,27 @@ function hienKhoHauCan(){
 
 
 
-    document.getElementById("khohaucan")
-    .style.display = "block";
+    document.getElementById("main")
+    .style.display = "none";
 
 
 
     document.getElementById("khohuanluyen")
     .style.display = "none";
+
+
+
+    document.getElementById("khohaucan")
+    .style.display = "block";
+
+
+
+    document.getElementById("thongke")
+    .style.display = "none";
+
+
+
+    dongMenu();
 
 }
 /* ĐỒNG HỒ */
