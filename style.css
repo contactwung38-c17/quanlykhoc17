@@ -746,11 +746,73 @@ th{
 
     /* MENU */
 
-    .menu-left{
+.menu-left{
 
-        width:220px;
+    position:fixed;
 
-    }
+    top:0;
+
+    left:-260px;
+
+
+
+    width:250px;
+
+    height:100%;
+
+
+
+    background:
+
+    rgba(0,0,0,0.92);
+
+
+
+    transition:0.3s;
+
+
+
+    z-index:99999;
+
+
+
+    padding-top:80px;
+
+}
+
+
+
+/* ITEM */
+
+.menu-left p{
+
+    color:white;
+
+    padding:18px 25px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,0.08);
+
+}
+
+
+
+/* HOVER */
+
+.menu-left p:hover{
+
+    background:
+
+    rgba(255,255,255,0.1);
+
+}
 
 
 
@@ -801,5 +863,50 @@ th{
         padding:15px;
 
     }
+
+}
+/* NÚT MENU */
+
+.menu-btn{
+
+    position:fixed;
+
+    top:20px;
+
+    left:20px;
+
+
+
+    width:50px;
+
+    height:50px;
+
+
+
+    background:
+
+    rgba(0,0,0,0.6);
+
+
+
+    color:white;
+
+
+
+    font-size:30px;
+
+    text-align:center;
+
+    line-height:50px;
+
+
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+
+
+    z-index:999999;
 
 }
