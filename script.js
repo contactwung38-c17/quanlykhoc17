@@ -263,6 +263,13 @@ function trangChu(){
 
 
 
+    /* HIỆN MENU */
+
+    document.getElementById("menu")
+    .style.display = "block";
+
+
+
     /* ẨN KHO */
 
     document.getElementById("khohuanluyen")
@@ -282,9 +289,9 @@ function trangChu(){
 
 
 
-    /* ĐÓNG MENU */
+    /* XÓA HASH QR */
 
-    dongMenu();
+    window.location.hash = "";
 
 }
 /* THỐNG KÊ */
@@ -384,24 +391,21 @@ window.onload = function(){
 
 
 
-    /* HIỆN MAIN */
+    /* ẨN MAIN */
 
     document.getElementById("main")
-    .style.display = "block";
-
-
-
-    /* ẨN TẤT CẢ */
-
-    document.getElementById("khohuanluyen")
     .style.display = "none";
 
 
 
-    document.getElementById("khohaucan")
+    /* ẨN MENU */
+
+    document.getElementById("menu")
     .style.display = "none";
 
 
+
+    /* ẨN THỐNG KÊ */
 
     document.getElementById("thongke")
     .style.display = "none";
@@ -414,7 +418,13 @@ window.onload = function(){
 
 
 
-        hienKhoHuanLuyen();
+        document.getElementById("khohuanluyen")
+        .style.display = "block";
+
+
+
+        document.getElementById("khohaucan")
+        .style.display = "none";
 
     }
 
@@ -426,7 +436,13 @@ window.onload = function(){
 
 
 
-        hienKhoHauCan();
+        document.getElementById("khohuanluyen")
+        .style.display = "none";
+
+
+
+        document.getElementById("khohaucan")
+        .style.display = "block";
 
     }
 
