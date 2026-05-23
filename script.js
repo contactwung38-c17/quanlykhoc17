@@ -256,17 +256,24 @@ function trangChu(){
 
 
 
-    /* HIỆN MAIN */
+    /* HIỆN LOGIN */
+
+    document.getElementById("login")
+    .style.display = "block";
+
+
+
+    /* ẨN MAIN */
 
     document.getElementById("main")
-    .style.display = "block";
+    .style.display = "none";
 
 
 
-    /* HIỆN MENU */
+    /* ẨN MENU */
 
     document.getElementById("menu")
-    .style.display = "block";
+    .style.display = "none";
 
 
 
@@ -292,6 +299,13 @@ function trangChu(){
     /* XÓA HASH QR */
 
     window.location.hash = "";
+
+
+
+    /* XÓA TÊN ĐÃ NHẬP */
+
+    document.getElementById("ten")
+    .value = "";
 
 }
 /* THỐNG KÊ */
