@@ -1,517 +1,54 @@
-function dangNhap(){
+/* MENU */
 
-
-
-    let ten =
-
-    document.getElementById("ten")
-    .value;
-
-
-
-    if(ten == ""){
-
-        alert("Vui lòng nhập tên");
-
-        return;
+        }
 
     }
 
-
-
-    /* ẨN LOGIN */
-
-    document.getElementById("login")
-    .style.display = "none";
-
-
-
-    /* HIỆN MAIN */
-
-    document.getElementById("main")
-    .style.display = "block";
-
-
-
-    /* CHÀO */
-
-    document.getElementById("chaomung")
-    .innerHTML =
-
-    "Xin chào: " + ten;
-
 }
 
 
-
-/* KHO HUẤN LUYỆN */
-
-function hienKhoHuanLuyen(){
-
-
-
-    document.getElementById("main")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohuanluyen")
-    .style.display = "block";
-
-
-
-    document.getElementById("khohaucan")
-    .style.display = "none";
-
-
-
-    document.getElementById("thongke")
-    .style.display = "none";
-
-
-
-    dongMenu();
-
-}
-
-
-
-/* KHO HẬU CẦN */
-
-function hienKhoHauCan(){
-
-
-
-    document.getElementById("main")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohuanluyen")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohaucan")
-    .style.display = "block";
-
-
-
-    document.getElementById("thongke")
-    .style.display = "none";
-
-
-
-    dongMenu();
-
-}
 /* ĐỒNG HỒ */
 
 setInterval(function(){
 
-
-
     let now = new Date();
-
 
 
     document.getElementById("dongho")
     .innerHTML =
-
     now.toLocaleString("vi-VN");
 
-
-
 },1000);
-/* ĐĂNG XUẤT */
 
-function dangXuat(){
 
-
-
-    location.reload();
-
-}
-/* TÌM KIẾM HUẤN LUYỆN */
-
-function timKiemHL(){
-
-
-
-    let input =
-
-    document.getElementById("timkiemhl")
-    .value.toLowerCase();
-
-
-
-    let table =
-
-    document.querySelectorAll(
-
-    "#khohuanluyen table tr"
-
-    );
-
-
-
-    for(let i = 1; i < table.length; i++){
-
-
-
-        let text =
-
-        table[i].innerText.toLowerCase();
-
-
-
-        if(text.includes(input)){
-
-            table[i].style.display = "";
-
-        }
-
-        else{
-
-            table[i].style.display = "none";
-
-        }
-
-    }
-
-}
-
-
-
-/* TÌM KIẾM HẬU CẦN */
-
-function timKiemHC(){
-
-
-
-    let input =
-
-    document.getElementById("timkiemhc")
-    .value.toLowerCase();
-
-
-
-    let table =
-
-    document.querySelectorAll(
-
-    "#khohaucan table tr"
-
-    );
-
-
-
-    for(let i = 1; i < table.length; i++){
-
-
-
-        let text =
-
-        table[i].innerText.toLowerCase();
-
-
-
-        if(text.includes(input)){
-
-            table[i].style.display = "";
-
-        }
-
-        else{
-
-            table[i].style.display = "none";
-
-        }
-
-    }
-
-}
-/* MỞ MENU */
-
-function moMenu(){
-
-    document.getElementById("menu")
-    .style.left = "0";
-
-}
-
-
-
-/* ĐÓNG MENU */
-
-function dongMenu(){
-
-    document.getElementById("menu")
-    .style.left = "-250px";
-
-}
-/* TRANG CHỦ */
-
-function trangChu(){
-
-
-
-    /* XÓA QR */
-
-    window.location.hash = "";
-
-
-
-    /* HIỆN LOGIN */
-
-    document.getElementById("login")
-    .style.display = "block";
-
-
-
-    /* ẨN MAIN */
-
-    document.getElementById("main")
-    .style.display = "none";
-
-
-
-    /* ẨN MENU */
-
-    document.getElementById("menu")
-    .style.display = "none";
-
-
-
-    /* ẨN KHO */
-
-    document.getElementById("khohuanluyen")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohaucan")
-    .style.display = "none";
-
-
-
-    /* ẨN THỐNG KÊ */
-
-    document.getElementById("thongke")
-    .style.display = "none";
-
-
-
-    /* XÓA TÊN */
-
-    document.getElementById("ten")
-    .value = "";
-
-}
-/* THỐNG KÊ */
-
-function thongKe(){
-
-
-
-    /* ẨN */
-
-    document.getElementById("main")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohuanluyen")
-    .style.display = "none";
-
-
-
-    document.getElementById("khohaucan")
-    .style.display = "none";
-
-
-
-    /* HIỆN THỐNG KÊ */
-
-    document.getElementById("thongke")
-    .style.display = "block";
-
-
-
-    /* ĐẾM HUẤN LUYỆN */
-
-    let hl =
-
-    document.querySelectorAll(
-
-    "#khohuanluyen table tr"
-
-    ).length - 1;
-
-
-
-    /* ĐẾM HẬU CẦN */
-
-    let hc =
-
-    document.querySelectorAll(
-
-    "#khohaucan table tr"
-
-    ).length - 1;
-
-
-
-    /* TỔNG */
-
-    let tong = hl + hc;
-
-
-
-    /* HIỆN */
-
-    document.getElementById("tkhl")
-    .innerHTML = hl + " vật chất";
-
-
-
-    document.getElementById("tkhc")
-    .innerHTML = hc + " vật chất";
-
-
-
-    document.getElementById("tktong")
-    .innerHTML = tong + " vật chất";
-
-
-
-    dongMenu();
-
-}
-/* LOAD WEB */
+/* QR */
 
 window.onload = function(){
-
-
 
     let hash = window.location.hash;
 
 
-
-    /* NẾU CÓ QR */
-
-    if(
-
-        hash == "#khohuanluyen"
-
-        ||
-
-        hash == "#khohaucan"
-
-    ){
-
-
-
-        /* ẨN LOGIN */
+    if(hash == "#khohuanluyen"){
 
         document.getElementById("login")
         .style.display = "none";
-
-
-
-        /* ẨN MAIN */
-
-        document.getElementById("main")
-        .style.display = "none";
-
-
-
-        /* ẨN MENU */
-
-        document.getElementById("menu")
-        .style.display = "none";
-
-
-
-        /* ẨN THỐNG KÊ */
-
-        document.getElementById("thongke")
-        .style.display = "none";
-
-
-
-        /* KHO HUẤN LUYỆN */
-
-        if(hash == "#khohuanluyen"){
-
-
-
-            document.getElementById("khohuanluyen")
-            .style.display = "block";
-
-
-
-            document.getElementById("khohaucan")
-            .style.display = "none";
-
-        }
-
-
-
-        /* KHO HẬU CẦN */
-
-        else if(hash == "#khohaucan"){
-
-
-
-            document.getElementById("khohuanluyen")
-            .style.display = "none";
-
-
-
-            document.getElementById("khohaucan")
-            .style.display = "block";
-
-        }
-
-    }
-
-
-
-    /* LOAD BÌNH THƯỜNG */
-
-    else{
-
-
-
-        document.getElementById("login")
-        .style.display = "block";
-
-
-
-        document.getElementById("main")
-        .style.display = "none";
-
-
-
-        document.getElementById("menu")
-        .style.display = "none";
-
 
 
         document.getElementById("khohuanluyen")
-        .style.display = "none";
-
-
-
-        document.getElementById("khohaucan")
-        .style.display = "none";
-
-
-
-        document.getElementById("thongke")
-        .style.display = "none";
+        .style.display = "block";
 
     }
 
-}
+
+    else if(hash == "#khohaucan"){
+
+        document.getElementById("login")
+        .style.display = "none";
+
+
+        document.getElementById("khohaucan")
+        .style.display = "block";
+
+    }
+
+};
