@@ -1,400 +1,364 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Kho Hậu Cần Của Đại đội 17</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <style>
+        /* Tông màu Luxury Dark Gold tinh tế giống kho Huấn luyện */
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #161616; color: #e0e0e0; }
+        
+        /* Cấu trúc Layout Sidebar và Content */
+        .wrapper { display: flex; align-items: stretch; }
+        #sidebar { min-width: 270px; max-width: 270px; background: #0c0c0c; color: #bcaaa4; min-height: 100vh; transition: all 0.3s; border-right: 1px solid #c5a85c30; }
+        
+        /* Khu vực hiển thị Logo chuyên nghiệp sử dụng ảnh png */
+        .sidebar-brand { padding: 25px 15px; text-align: center; border-bottom: 1px solid #c5a85c20; background: #050505; }
+        .sidebar-brand h5 { color: #c5a85c; font-size: 14px; font-weight: bold; letter-spacing: 1.5px; margin-top: 15px; text-transform: uppercase; }
+        
+        /* Hiệu ứng phát sáng nhẹ nhàng, cao cấp cho tệp ảnh logo.png */
+        .gold-img-container {
+            filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.7))
+                    drop-shadow(0px 0px 5px rgba(197, 168, 92, 0.4));
+            transition: all 0.3s ease;
+        }
+        .sidebar-brand:hover .gold-img-container {
+            filter: drop-shadow(0px 5px 12px rgba(0, 0, 0, 0.8))
+                    drop-shadow(0px 0px 12px rgba(245, 215, 127, 0.6));
+        }
 
-content="width=device-width, initial-scale=1.0">
+        #sidebar ul.components { padding: 20px 0; }
+        #sidebar ul li a { padding: 14px 22px; font-size: 15px; display: block; color: #aaaaaa; text-decoration: none; transition: all 0.2s; border-left: 3px solid transparent; }
+        #sidebar ul li a:hover, #sidebar ul li.active > a { 
+            color: #111; 
+            background: linear-gradient(90deg, #f5d77f, #c5a85c); 
+            font-weight: 600; 
+            box-shadow: 0 4px 12px rgba(197, 168, 92, 0.2);
+            border-left: 3px solid #fff;
+        }
+        #sidebar ul li a i { margin-right: 12px; width: 20px; text-align: center; color: #c5a85c; }
+        #sidebar ul li a:hover i, #sidebar ul li.active > a i { color: #111; }
+        
+        #content { width: 100%; padding: 30px; min-height: 100vh; background: #131313; }
+        .main-header { background: #0c0c0c; padding: 22px; margin-bottom: 25px; border-radius: 8px; border: 1px solid #c5a85c20; display: flex; justify-content: space-between; align-items: center; }
+        .main-header h2 { font-size: 22px; margin: 0; color: #c5a85c; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
 
-    <title>Hệ thống kho Đại đội 17</title>
+        /* KHUNG HIỂN THỊ ẢNH ĐƯỢC THU NHỎ GỌN THEO ĐÚNG TỶ LỆ GỐC 2304x1728 (4:3) */
+        .photo-box { background: #0c0c0c; border: 1px solid #c5a85c40; border-radius: 8px; padding: 12px; margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); max-width: 520px; margin-left: auto; margin-right: auto; }
+        .photo-container { position: relative; width: 100%; padding-top: 75%; /* Thiết lập tỉ lệ khung hình 4:3 */ overflow: hidden; border-radius: 6px; border: 1px solid #222; background-color: #111; }
+        .photo-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        .photo-caption { background: #050505; border-top: 1px solid #c5a85c25; padding: 10px 15px; color: #f5d77f; font-size: 13px; font-weight: bold; display: flex; align-items: center; justify-content: center; border-radius: 0 0 6px 6px; }
+        .photo-caption i { margin-right: 8px; color: #c5a85c; }
 
-    <link rel="stylesheet" href="style.css">
+        /* Hộp Nội Dung Kiểu Hộp Đen Khung Vàng */
+        .box { background: #0c0c0c; border: 1px solid #c5a85c40; border-radius: 8px; padding: 25px; margin-bottom: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+        .box-header { font-size: 16px; font-weight: bold; color: #c5a85c; border-bottom: 1px solid #c5a85c20; padding-bottom: 12px; margin-bottom: 22px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Ô nhập liệu tối tinh chỉnh viền gold khi chọn */
+        .form-control { background-color: #161616 !important; border: 1px solid #333333 !important; color: #ffffff !important; height: 45px; border-radius: 6px; }
+        .form-control:focus { border-color: #c5a85c !important; box-shadow: 0 0 0 0.2rem rgba(197, 168, 92, 0.15) !important; }
+        .form-control::placeholder { color: #666666; }
 
+        /* Nút bấm hiệu ứng Vàng Kim Loại Gradient */
+        .btn-gold { background: linear-gradient(135deg, #f5d77f, #c5a85c); color: #111 !important; font-weight: bold; border: none; transition: all 0.3s; height: 45px; border-radius: 6px; }
+        .btn-gold:hover { background: linear-gradient(135deg, #c5a85c, #a3853c); box-shadow: 0 4px 12px rgba(197, 168, 92, 0.3); transform: translateY(-1px); }
+        .btn-outline-gold { background: transparent; color: #c5a85c; border: 1px solid #c5a85c; font-weight: bold; border-radius: 6px; transition: all 0.2s; }
+        .btn-outline-gold:hover { background: linear-gradient(135deg, #f5d77f, #c5a85c); color: #111; }
+        .btn-danger-custom { background-color: #2a1414; border: 1px solid #ff4d4f; color: #ff999a; border-radius: 4px; transition: all 0.2s; }
+        .btn-danger-custom:hover { background-color: #ff4d4f; color: #fff; }
+        
+        /* Bảng thiết kế huyền bí */
+        .table { color: #dddddd; margin-bottom: 0; }
+        .table-bordered { border: 1px solid #c5a85c20 !important; }
+        .table-bordered th, .table-bordered td { border: 1px solid #c5a85c10 !important; }
+        .table thead th { background-color: #060606; color: #c5a85c; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #c5a85c35 !important; font-size: 14px; padding: 14px 10px; }
+        .table-striped tbody tr:nth-of-type(odd) { background-color: #111111; }
+        .table-hover tbody tr:hover { background-color: #181818; }
+        .table td { vertical-align: middle; padding: 12px 10px; }
+        
+        /* Chỉ số đếm hiển thị bắt mắt */
+        .card-counter { background: #0c0c0c; border: 1px solid #c5a85c25; padding: 22px; border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .counter-icon { font-size: 32px; color: #c5a85c; opacity: 0.8; }
+        .counter-label { text-transform: uppercase; font-size: 12px; color: #888888; letter-spacing: 0.5px; display: block; }
+        .counter-number { display: block; font-weight: bold; font-size: 28px; color: #ffffff; margin-top: 5px; font-family: 'Courier New', Courier, monospace; }
+        
+        .badge-gold { background-color: rgba(197, 168, 92, 0.1); color: #f5d77f; border: 1px solid #c5a85c30; font-size: 12px; padding: 6px 14px; border-radius: 20px; }
+
+        /* Cấu hình khi người dùng chọn nút In */
+        @media print {
+            body { background: white; color: black; }
+            #sidebar, .photo-box, .box:first-of-type, .btn-danger-custom, th:last-child, td:last-child, .row.mb-3 { display: none !important; }
+            #content { padding: 0; }
+            .box { border: 1px solid #000; box-shadow: none; background: white; }
+            .table thead th { background: #eee; color: #000; }
+        }
+    </style>
 </head>
-
 <body>
-    <!-- NÚT MENU -->
 
-<div class="nutmenu"
-
-onclick="moMenu()">
-
-☰
-
-</div>
-
-
-
-<!-- MENU -->
-
-<div class="menu-left"
-
-id="menu">
-
-
-
-    <div class="dong"
-
-    onclick="dongMenu()">
-
-        ×
-
-    </div>
-
-
-
-    <h2>MENU</h2>
-
-<p onclick="trangChu()">
-
-    Trang chủ
-
-</p>
-
-
-
-<p onclick="hienKhoHuanLuyen()">
-
-    Kho huấn luyện
-
-</p>
-
-
-
-<p onclick="hienKhoHauCan()">
-
-    Kho hậu cần
-
-</p>
-
-
-
-<p onclick="thongKe()">
-
-    Thống kê
-
-</p>
-
-</div>
-
-    <!-- ĐĂNG NHẬP -->
-
-    <div id="login">
-
-        <img src="logo.png"
-
-class="logo">
-
-
-
-<h1>HỆ THỐNG KHO ĐẠI ĐỘI 17</h1>
-
-        <input type="text"
-        id="ten"
-
-        placeholder="Nhập tên của bạn">
-
-        <br>
-
-        <button onclick="dangNhap()">
-
-            Đăng nhập
-
-        </button>
-
-    </div>
-
-
-
-    <!-- TRANG CHÍNH -->
-
-    <div id="main">
-
-        <h2 id="chaomung"></h2>
-        <h3 id="dongho"></h3>
-
-        <h1>HỆ THỐNG KHO ĐẠI ĐỘI 17</h1>
-<button onclick="dangXuat()">
-
-    Đăng xuất
-
-</button>
-
-
-        <div class="container">
-
-
-
-            <!-- KHO HUẤN LUYỆN -->
-
-            <div class="box xanh"
-
-            onclick="hienKhoHuanLuyen()">
-
-                KHO HUẤN LUYỆN
-
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-brand">
+            <div class="gold-img-container">
+                <img src="logo.png" alt="Logo Công Binh" style="width: 95px; height: 95px; object-fit: contain;">
             </div>
+            <h5>Kho Hậu Cần</h5>
+        </div>
+        <ul class="list-unstyled components">
+            <li class="active">
+                <a href="#"><i class="fas fa-th-large"></i> Bảng điều khiển</a>
+            </li>
+            <li>
+                <a href="#" onclick="exportToExcel()"><i class="fas fa-file-excel"></i> Xuất file Excel</a>
+            </li>
+            <li>
+                <a href="#" onclick="window.print()"><i class="fas fa-print"></i> In danh sách kho</a>
+            </li>
+            <li>
+                <a href="#" onclick="resetToDefault()"><i class="fas fa-history"></i> Cài lại dữ liệu gốc</a>
+            </li>
+        </ul>
+    </nav>
 
-
-
-            <!-- KHO HẬU CẦN -->
-
-            <div class="box do"
-
-            onclick="hienKhoHauCan()">
-
-                KHO HẬU CẦN
-
-            </div>
-
+    <div id="content">
+        <div class="main-header">
+            <h2><i class="fas fa-warehouse"></i> Hệ Thống Quản Lý Kho Hậu Cần Của Đại Đội 17</h2>
+            <span class="badge badge-gold">Mô hình cao cấp v2.5</span>
         </div>
 
+        <div class="photo-box">
+            <div class="photo-container">
+                <img src="kho hậu cần.jpg" onerror="this.src='https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80'; this.style.opacity='0.4';" alt="Không gian kho hậu cần thực tế">
+            </div>
+            <div class="photo-caption">
+                <i class="fas fa-camera"></i> Hình ảnh thực tế sắp xếp vật chất tại gian kho hậu cần chuyên ngành
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card-counter">
+                    <div class="counter-info">
+                        <span class="counter-label">Số chủng loại danh mục hậu cần</span>
+                        <span class="counter-number" id="summaryItems">0</span>
+                    </div>
+                    <div class="counter-icon"><i class="fas fa-clipboard-list"></i></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-counter">
+                    <div class="counter-info">
+                        <span class="counter-label">Tổng số lượng tồn vật chất</span>
+                        <span class="counter-number" id="summaryQty">0</span>
+                    </div>
+                    <div class="counter-icon"><i class="fas fa-boxes"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-header"><i class="fas fa-plus-circle"></i> Nhập thêm vật chất vào hệ thống kho hậu cần</div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <input type="text" id="pName" class="form-control" placeholder="Tên vật chất hậu cần...">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <input type="text" id="pYear" class="form-control" placeholder="Năm sản xuất, cấp (VD: 2023)">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <input type="number" id="pQty" class="form-control" placeholder="Số lượng thực tế">
+                </div>
+                <div class="col-md-2 mb-3">
+                    <button class="btn btn-gold btn-block" onclick="addProduct()"><i class="fas fa-check-circle"></i> Lưu vào kho</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-header"><i class="fas fa-layer-group"></i> Chi tiết bảng kiểm kê vật chất tồn kho</div>
+            <div class="row mb-3">
+                <div class="col-md-7 mb-2">
+                    <div class="input-group">
+                        <input type="text" id="searchBox" class="form-control" oninput="renderTable()" placeholder="Gõ tên vật chất hậu cần cần tìm...">
+                    </div>
+                </div>
+                <div class="col-md-5 mb-2 text-right">
+                    <button class="btn btn-outline-gold mr-1" onclick="exportToExcel()"><i class="fas fa-download"></i> Tải Excel</button>
+                    <button class="btn btn-secondary" onclick="window.print()"><i class="fas fa-print"></i> In bản giấy</button>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th style="width: 8%">TT</th>
+                            <th>Tên Vật Chất Nhập Kho</th>
+                            <th style="width: 25%">Năm Sản Xuất, Cấp</th>
+                            <th style="width: 18%">Số Lượng</th>
+                            <th style="width: 12%">Thao Tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable">
+                        </tbody>
+                </table>
+                <div id="emptyMessage" class="text-center text-muted my-4" style="display: none; font-style: italic;">
+                    Hệ thống lọc không tìm thấy tên vật chất phù hợp.
+                </div>
+            </div>
+        </div>
     </div>
-
-
-    <!-- KHO HUẤN LUYỆN -->
-
-    <div id="khohuanluyen">
-
-    <h2>KHO HUẤN LUYỆN</h2>
-    <button onclick="trangChu()">
-
-    ← Trang chủ
-
-</button>
-    <input type="text"
-
-id="timkiemhl"
-
-placeholder="Tìm vật chất kho huấn luyện"
-
-onkeyup="timKiemHL()">
-
-    <table>
-
-        <tr>
-            <th>Tên vật chất</th>
-            <th>Năm</th>
-            <th>Số lượng</th>
-        </tr>
-
-        <tr><td>Nhà bạt</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mặt nạ phòng hóa</td><td>2018</td><td>06</td></tr>
-        <tr><td>Bia số 6b</td><td>2024</td><td>03</td></tr>
-        <tr><td>Bia số 7d</td><td>2024</td><td>03</td></tr>
-        <tr><td>Bia số 8b</td><td>2024</td><td>03</td></tr>
-        <tr><td>Bia số 16</td><td>2024</td><td>03</td></tr>
-        <tr><td>Bia số 7c</td><td>2024</td><td>02</td></tr>
-        <tr><td>Bia số 8c</td><td>2024</td><td>02</td></tr>
-        <tr><td>Bia số 6</td><td>2024</td><td>06</td></tr>
-        <tr><td>Bia số 10</td><td>2024</td><td>06</td></tr>
-        <tr><td>Bia số 9</td><td>2024</td><td>02</td></tr>
-        <tr><td>Bia đâm lê</td><td>2024</td><td>02</td></tr>
-        <tr><td>Chùy</td><td>2024</td><td>02</td></tr>
-        <tr><td>Máy dò mìn</td><td>2018</td><td>08</td></tr>
-        <tr><td>Áo phao</td><td>2023</td><td>02</td></tr>
-        <tr><td>Phao bơi</td><td>2023</td><td>02</td></tr>
-        <tr><td>Lượng nổ 400g nhựa</td><td>2023</td><td>40</td></tr>
-        <tr><td>Lượng nổ 400g gỗ</td><td>2023</td><td>50</td></tr>
-        <tr><td>Lượng nổ 200g nhựa</td><td>2023</td><td>40</td></tr>
-        <tr><td>Lượng nổ 200g gỗ</td><td>2023</td><td>90</td></tr>
-        <tr><td>Lượng nổ 50g</td><td>2023</td><td>40</td></tr>
-        <tr><td>Lượng nổ 25g</td><td>2023</td><td>50</td></tr>
-        <tr><td>Nẹp lượng nổ dài</td><td>2023</td><td>10</td></tr>
-        <tr><td>Nẹp lượng nổ khối</td><td>2023</td><td>06</td></tr>
-        <tr><td>Mô hình cầu quân sự</td><td>2023</td><td>02</td></tr>
-        <tr><td>Mô hình chông</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mô hình công sự SCH</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mô hình công sự chữ A</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mô hình hàng rào</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mô hình bãi nổ thủ công</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mô hình bãi nổ điện</td><td>2024</td><td>01</td></tr>
-        <tr><td>Mô hình bếp Hoàng Cầm</td><td>2023</td><td>01</td></tr>
-        <tr><td>Kíp huấn luyện</td><td>2023</td><td>50</td></tr>
-        <tr><td>Nụ xùy huấn luyện</td><td>2023</td><td>50</td></tr>
-        <tr><td>Bộc phá dài</td><td>2023</td><td>09</td></tr>
-        <tr><td>Bộc phá khối</td><td>2023</td><td>06</td></tr>
-        <tr><td>Mìn TM-46</td><td>2023</td><td>06</td></tr>
-        <tr><td>Mìn TM-57</td><td>2023</td><td>07</td></tr>
-        <tr><td>Mìn TM-62M</td><td>2023</td><td>02</td></tr>
-        <tr><td>Mìn M15</td><td>2023</td><td>10</td></tr>
-        <tr><td>Mìn POMZ-2</td><td>2023</td><td>03</td></tr>
-        <tr><td>Mìn OZM-72</td><td>2023</td><td>20</td></tr>
-        <tr><td>Mìn K-58</td><td>2023</td><td>06</td></tr>
-        <tr><td>Biển báo nguy hiểm</td><td>2023</td><td>04</td></tr>
-<tr><td>Cọc tiêu bãi nổ</td><td>2023</td><td>20</td></tr>
-<tr><td>Dây cháy chậm</td><td>2023</td><td>15</td></tr>
-<tr><td>Dây điện điểm hỏa</td><td>2023</td><td>12</td></tr>
-<tr><td>Kìm cắt dây</td><td>2023</td><td>08</td></tr>
-<tr><td>Đèn tín hiệu</td><td>2023</td><td>06</td></tr>
-<tr><td>Cờ chỉ huy</td><td>2023</td><td>10</td></tr>
-<tr><td>Sào dò mìn</td><td>2023</td><td>04</td></tr>
-<tr><td>Bảng chỉ tiêu</td><td>2023</td><td>05</td></tr>
-<tr><td>Giá treo mô hình</td><td>2023</td><td>03</td></tr>
-<tr><td>Đèn huấn luyện đêm</td><td>2024</td><td>02</td></tr>
-        <tr><td>Mìn K69</td><td>2023</td><td>01</td></tr>
-        <tr><td>Mìn M16A2</td><td>2023</td><td>10</td></tr>
-        <tr><td>Mìn DH-10</td><td>2024</td><td>04</td></tr>
-        <tr><td>Mìn MOH50</td><td>2024</td><td>01</td></tr>
-        <tr><td>Túi đựng mìn</td><td>2024</td><td>12</td></tr>
-        <tr><td>Máng bố trí mìn</td><td>2023</td><td>04</td></tr>
-        <tr><td>Guồng bố trí mìn</td><td>2023</td><td>04</td></tr>
-        <tr><td>Biển đánh dấu cửa mở</td><td>2023</td><td>06</td></tr>
-        <tr><td>Thuốn</td><td>2023</td><td>54</td></tr>
-        <tr><td>Cọc tuyến</td><td>2023</td><td>16</td></tr>
-        <tr><td>Cọc tiếp đầu</td><td>2023</td><td>39</td></tr>
-        <tr><td>Cọc gia lông</td><td>2023</td><td>23</td></tr>
-        <tr><td>Thước 3m</td><td>2023</td><td>06</td></tr>
-        <tr><td>Thước vuông góc</td><td>2023</td><td>06</td></tr>
-        <tr><td>Thước đo độ</td><td>2023</td><td>06</td></tr>
-        <tr><td>Thước đo độ dốc</td><td>2023</td><td>02</td></tr>
-        <tr><td>Cọc dấu</td><td>2023</td><td>100</td></tr>
-        <tr><td>Dùi đục</td><td>2023</td><td>10</td></tr>
-        <tr><td>Đà kê</td><td>2023</td><td>12</td></tr>
-        <tr><td>Vồ tay</td><td>2023</td><td>06</td></tr>
-        <tr><td>Biển bảng bãi nổ</td><td>2023</td><td>05</td></tr>
-        <tr><td>Giá dựng bia</td><td>2023</td><td>06</td></tr>
-        <tr><td>Giá tập điều lệnh</td><td>2023</td><td>09</td></tr>
-        <tr><td>Máy phát điều khiển nổ từ xa ĐKN 9.5</td><td>2024</td><td>02</td></tr>
-
-    </table>
-
 </div>
 
+<script>
+    // Toàn bộ dữ liệu danh mục đồng bộ chính xác 100% từ tệp Word Kho Hậu Cần
+    const defaultData = [
+        { name: "Cuốc CB", year: "2023", quantity: 12 },
+        { name: "Xẻng CB", year: "2023", quantity: 19 },
+        { name: "Xẻng BB", year: "2023", quantity: 18 },
+        { name: "Cuốc BB", year: "2023", quantity: 8 },
+        { name: "Xà beng", year: "2023", quantity: 6 },
+        { name: "Đầm chân voi", year: "2023", quantity: 10 },
+        { name: "Búa 1 – 4 kg", year: "2023", quantity: 4 },
+        { name: "Thuổng", year: "2023", quantity: 10 },
+        { name: "Cưa tay", year: "2023", quantity: 6 },
+        { name: "Bao đựng cưa tay", year: "2023", quantity: 6 },
+        { name: "Dao quắm", year: "2023", quantity: 14 },
+        { name: "Dao tông", year: "2023", quantity: 13 },
+        { name: "Bao đựng dao tông", year: "2023", quantity: 6 },
+        { name: "Máy đo xa", year: "2023", quantity: 1 },
+        { name: "Bộ sửa chữa QCCT", year: "2023", quantity: 1 },
+        { name: "Kìm bóp kíp", year: "2023", quantity: 40 },
+        { name: "Dao cắt dây cháy chậm", year: "2023", quantity: 29 },
+        { name: "Thuốn dò mìn", year: "2023", quantity: 98 },
+        { name: "Cưa cá mập", year: "2022", quantity: 6 },
+        { name: "Tăng", year: "2023", quantity: 65 },
+        { name: "Võng", year: "2023", quantity: 65 },
+        { name: "Dây võng", year: "2023", quantity: 65 },
+        { name: "Bao tượng", year: "2023", quantity: 65 },
+        { name: "Đai lưng", year: "2023", quantity: 22 },
+        { name: "Bình tông", year: "2023", quantity: 65 },
+        { name: "Vỏ bình tông", year: "2023", quantity: 108 },
+        { name: "Túi cơm", year: "2023", quantity: 22 },
+        { name: "Bạt bếp", year: "2023", quantity: 2 },
+        { name: "Mũ A2", year: "2023", quantity: 30 },
+        { name: "Rumine", year: "2023", quantity: 1 },
+        { name: "Bạt nằm", year: "2023", quantity: 22 },
+        { name: "Gàu múc canh", year: "2023", quantity: 2 },
+        { name: "Gàu 1 lít", year: "2023", quantity: 1 },
+        { name: "Vợt rau", year: "2023", quantity: 2 },
+        { name: "Xẻng đảo cơm", year: "2023", quantity: 2 },
+        { name: "Môi 0,51", year: "2023", quantity: 2 },
+        { name: "Soong B20", year: "2023", quantity: 1 },
+        { name: "Soong Ø60", year: "2023", quantity: 1 },
+        { name: "Soong Ø29", year: "2023", quantity: 17 },
+        { name: "Nắp 2 ngăn", year: "2023", quantity: 15 },
+        { name: "Vật chất huấn luyện đêm", year: "2024", quantity: 2 }
+    ];
 
-    <!-- KHO HẬU CẦN -->
+    let inventory = JSON.parse(localStorage.getItem('finalLogisticData'));
+    if (!inventory || inventory.length === 0) {
+        inventory = [...defaultData];
+        localStorage.setItem('finalLogisticData', JSON.stringify(inventory));
+    }
 
-    <div id="khohaucan">
+    function renderTable() {
+        const tableBody = document.getElementById('inventoryTable');
+        const emptyMessage = document.getElementById('emptyMessage');
+        const keyword = document.getElementById('searchBox').value.trim().toLowerCase();
+        
+        tableBody.innerHTML = '';
+        
+        let filteredData = inventory.filter(item => 
+            item.name.toLowerCase().includes(keyword)
+        );
 
-    <h2>KHO HẬU CẦN</h2>
-    <button onclick="trangChu()">
+        if (filteredData.length === 0) {
+            emptyMessage.style.display = 'block';
+        } else {
+            emptyMessage.style.display = 'none';
+        }
 
-    ← Trang chủ
+        filteredData.forEach((item, index) => {
+            const realIndex = inventory.findIndex(p => p.name === item.name && p.year === item.year);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td><strong style="color: #ffffff;">${item.name}</strong></td>
+                <td><span class="badge badge-gold">${item.year}</span></td>
+                <td style="color: #f5d77f; font-weight: bold; font-size:15px;">${Number(item.quantity).toLocaleString('vi-VN')}</td>
+                <td><button class="btn btn-danger-custom btn-sm" onclick="deleteProduct(${realIndex})"><i class="fas fa-trash-alt"></i> Xóa</button></td>
+            `;
+            tableBody.appendChild(row);
+        });
 
-</button>
-    <input type="text"
+        // Cập nhật số lượng trên Dashboard
+        document.getElementById('summaryItems').innerText = inventory.length;
+        document.getElementById('summaryQty').innerText = inventory.reduce((sum, item) => sum + Number(item.quantity), 0).toLocaleString('vi-VN');
+    }
 
-id="timkiemhc"
+    function addProduct() {
+        const name = document.getElementById('pName').value.trim();
+        const year = document.getElementById('pYear').value.trim();
+        const quantity = document.getElementById('pQty').value;
 
-placeholder="Tìm vật chất kho hậu cần"
+        if (!name || !year || !quantity) {
+            alert('Vui lòng điền đủ 3 trường dữ liệu: tên, năm và số lượng!');
+            return;
+        }
 
-onkeyup="timKiemHC()">
+        const existing = inventory.find(item => item.name.toLowerCase() === name.toLowerCase() && item.year === year);
+        if (existing) {
+            existing.quantity += parseInt(quantity);
+        } else {
+            inventory.push({ name, year, quantity: parseInt(quantity) });
+        }
 
-    <table>
+        localStorage.setItem('finalLogisticData', JSON.stringify(inventory));
+        renderTable();
+        
+        document.getElementById('pName').value = '';
+        document.getElementById('pYear').value = '';
+        document.getElementById('pQty').value = '';
+    }
 
-        <tr>
-            <th>Tên vật chất</th>
-            <th>Năm</th>
-            <th>Số lượng</th>
-        </tr>
+    function deleteProduct(index) {
+        if (confirm('Xác nhận xóa vĩnh viễn mục vật chất hậu cần này?')) {
+            inventory.splice(index, 1);
+            localStorage.setItem('finalLogisticData', JSON.stringify(inventory));
+            renderTable();
+        }
+    }
 
-        <tr><td>Cuốc CB</td><td>2023</td><td>12</td></tr>
-        <tr><td>Xẻng CB</td><td>2023</td><td>19</td></tr>
-        <tr><td>Xẻng BB</td><td>2023</td><td>18</td></tr>
-        <tr><td>Cuốc BB</td><td>2023</td><td>08</td></tr>
-        <tr><td>Xà beng</td><td>2023</td><td>06</td></tr>
-        <tr><td>Đầm chân voi</td><td>2023</td><td>10</td></tr>
-        <tr><td>Búa 1 - 4kg</td><td>2023</td><td>04</td></tr>
-        <tr><td>Thuổng</td><td>2023</td><td>10</td></tr>
-        <tr><td>Cưa tay</td><td>2023</td><td>06</td></tr>
-        <tr><td>Bao đựng cưa tay</td><td>2023</td><td>06</td></tr>
-        <tr><td>Dao quắm</td><td>2023</td><td>14</td></tr>
-        <tr><td>Dao tông</td><td>2023</td><td>13</td></tr>
-        <tr><td>Bao đựng dao tông</td><td>2023</td><td>06</td></tr>
-        <tr><td>Máy đo xa</td><td>2023</td><td>01</td></tr>
-        <tr><td>Bộ sửa chữa QCCT</td><td>2023</td><td>01</td></tr>
-        <tr><td>Kìm bóp kíp</td><td>2023</td><td>40</td></tr>
-        <tr><td>Dao cắt dây cháy chậm</td><td>2023</td><td>29</td></tr>
-        <tr><td>Thuốn dò mìn</td><td>2023</td><td>98</td></tr>
-        <tr><td>Cưa cá mập</td><td>2022</td><td>06</td></tr>
-        <tr><td>Tăng</td><td>2023</td><td>65</td></tr>
-        <tr><td>Võng</td><td>2023</td><td>65</td></tr>
-        <tr><td>Dây võng</td><td>2023</td><td>65</td></tr>
-        <tr><td>Bao tượng</td><td>2023</td><td>65</td></tr>
-        <tr><td>Đai lưng</td><td>2023</td><td>22</td></tr>
-        <tr><td>Bình tông</td><td>2023</td><td>65</td></tr>
-        <tr><td>Vỏ bình tông</td><td>2023</td><td>108</td></tr>
-        <tr><td>Túi cơm</td><td>2023</td><td>22</td></tr>
-        <tr><td>Bạt bếp</td><td>2023</td><td>02</td></tr>
-        <tr><td>Mũ A2</td><td>2023</td><td>30</td></tr>
-        <tr><td>Rumine</td><td>2023</td><td>01</td></tr>
-        <tr><td>Bạt nằm</td><td>2023</td><td>22</td></tr>
-        <tr><td>Gàu múc canh</td><td>2023</td><td>02</td></tr>
-        <tr><td>Gàu 1 lít</td><td>2023</td><td>01</td></tr>
-        <tr><td>Vợt rau</td><td>2023</td><td>02</td></tr>
-        <tr><td>Xẻng đảo cơm</td><td>2023</td><td>02</td></tr>
-        <tr><td>Môi 0,5l</td><td>2023</td><td>02</td></tr>
-        <tr><td>Soong B20</td><td>2023</td><td>01</td></tr>
-        <tr><td>Soong Ø60</td><td>2023</td><td>01</td></tr>
-        <tr><td>Soong Ø29</td><td>2023</td><td>17</td></tr>
-        <tr><td>Nắp 2 ngăn</td><td>2023</td><td>15</td></tr>
-        <tr><td>Vật chất huấn luyện đêm</td><td>2024</td><td>02</td></tr>
+    function exportToExcel() {
+        if (inventory.length === 0) {
+            alert('Không có dữ liệu kiểm kê để xuất!');
+            return;
+        }
+        const excelData = inventory.map((item, index) => ({
+            'TT': index + 1,
+            'TÊN VẬT CHẤT': item.name,
+            'NĂM SẢN XUẤT, CẤP': item.year,
+            'SỐ LƯỢNG': item.quantity
+        }));
+        const worksheet = XLSX.utils.json_to_sheet(excelData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "VatChatHC");
+        XLSX.writeFile(workbook, "BaoCao_Kho_Hau_Can.xlsx");
+    }
 
-    </table>
+    function resetToDefault() {
+        if (confirm('Khôi phục danh sách kho về danh mục 41 mặt hàng hậu cần gốc ban đầu?')) {
+            inventory = [...defaultData];
+            localStorage.setItem('finalLogisticData', JSON.stringify(inventory));
+            renderTable();
+        }
+    }
 
-</div>
-
-
-<!-- THỐNG KÊ -->
-
-<div id="thongke">
-
-    <h2>THỐNG KÊ VẬT CHẤT</h2>
-
-
-
-    <div class="tkbox">
-
-        <h3>
-
-            Kho huấn luyện
-
-        </h3>
-
-        <p id="tkhl"></p>
-
-    </div>
-
-
-
-    <div class="tkbox">
-
-        <h3>
-
-            Kho hậu cần
-
-        </h3>
-
-        <p id="tkhc"></p>
-
-    </div>
-
-
-
-    <div class="tkbox">
-
-        <h3>
-
-            Tổng toàn bộ
-
-        </h3>
-
-        <p id="tktong"></p>
-
-    </div>
-
-</div>
-<!-- FOOTER -->
-
-<div class="footer">
-
-    © Đại đội 17 - Năm 2026
-
-</div>
-    <script src="script.js"></script>
-
+    renderTable();
+</script>
 </body>
-
 </html>
