@@ -1,3 +1,5 @@
+/* ĐĂNG NHẬP */
+
 function dangNhap(){
 
 
@@ -11,7 +13,7 @@ function dangNhap(){
 
     if(ten == ""){
 
-        alert("Vui lòng nhập tên");
+        alert("Nhập tên");
 
         return;
 
@@ -26,19 +28,35 @@ function dangNhap(){
 
 
 
-    /* HIỆN MAIN */
+   /* HIỆN MAIN */
 
-    document.getElementById("main")
-    .style.display = "block";
+document.getElementById("main")
+.style.display = "block";
 
 
 
-    /* CHÀO */
+/* HIỆN MENU */
 
-    document.getElementById("chaomung")
-    .innerHTML =
+document.getElementById("menu")
+.style.display = "block";
 
-    "Xin chào: " + ten;
+
+    /* ẨN KHO */
+
+    document.getElementById("khohuanluyen")
+    .style.display = "none";
+
+
+
+    document.getElementById("khohaucan")
+    .style.display = "none";
+
+
+
+    /* ẨN THỐNG KÊ */
+
+    document.getElementById("thongke")
+    .style.display = "none";
 
 }
 
@@ -231,9 +249,16 @@ function timKiemHC(){
     }
 
 }
-/* MỞ MENU */
+//* MỞ MENU */
 
 function moMenu(){
+
+
+
+    document.getElementById("menu")
+    .style.display = "block";
+
+
 
     document.getElementById("menu")
     .style.left = "0";
@@ -246,10 +271,13 @@ function moMenu(){
 
 function dongMenu(){
 
+
+
     document.getElementById("menu")
-    .style.left = "-250px";
+    .style.left = "-260px";
 
 }
+
 /* TRANG CHỦ */
 
 function trangChu(){
