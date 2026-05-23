@@ -339,3 +339,67 @@ function thongKe(){
     dongMenu();
 
 }
+/* MỞ TỪ QR */
+
+window.onload = function(){
+
+
+
+    let hash = window.location.hash;
+
+
+
+    /* ẨN LOGIN */
+
+    document.getElementById("login")
+    .style.display = "none";
+
+
+
+    /* HIỆN MAIN */
+
+    document.getElementById("main")
+    .style.display = "block";
+
+
+
+    /* ẨN TẤT CẢ */
+
+    document.getElementById("khohuanluyen")
+    .style.display = "none";
+
+
+
+    document.getElementById("khohaucan")
+    .style.display = "none";
+
+
+
+    document.getElementById("thongke")
+    .style.display = "none";
+
+
+
+    /* QR KHO HUẤN LUYỆN */
+
+    if(hash == "#khohuanluyen"){
+
+
+
+        hienKhoHuanLuyen();
+
+    }
+
+
+
+    /* QR KHO HẬU CẦN */
+
+    else if(hash == "#khohaucan"){
+
+
+
+        hienKhoHauCan();
+
+    }
+
+}
