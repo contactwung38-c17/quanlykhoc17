@@ -256,6 +256,12 @@ function trangChu(){
 
 
 
+    /* XÓA QR */
+
+    window.location.hash = "";
+
+
+
     /* HIỆN LOGIN */
 
     document.getElementById("login")
@@ -296,13 +302,7 @@ function trangChu(){
 
 
 
-    /* XÓA HASH QR */
-
-    window.location.hash = "";
-
-
-
-    /* XÓA TÊN ĐÃ NHẬP */
+    /* XÓA TÊN */
 
     document.getElementById("ten")
     .value = "";
@@ -388,7 +388,7 @@ function thongKe(){
     dongMenu();
 
 }
-/* MỞ TỪ QR */
+/* LOAD WEB */
 
 window.onload = function(){
 
@@ -398,55 +398,104 @@ window.onload = function(){
 
 
 
-    /* ẨN LOGIN */
+    /* NẾU CÓ QR */
 
-    document.getElementById("login")
-    .style.display = "none";
+    if(
 
+        hash == "#khohuanluyen"
 
+        ||
 
-    /* ẨN MAIN */
+        hash == "#khohaucan"
 
-    document.getElementById("main")
-    .style.display = "none";
-
-
-
-    /* ẨN MENU */
-
-    document.getElementById("menu")
-    .style.display = "none";
+    ){
 
 
 
-    /* ẨN THỐNG KÊ */
+        /* ẨN LOGIN */
 
-    document.getElementById("thongke")
-    .style.display = "none";
-
-
-
-    /* QR KHO HUẤN LUYỆN */
-
-    if(hash == "#khohuanluyen"){
-
-
-
-        document.getElementById("khohuanluyen")
-        .style.display = "block";
-
-
-
-        document.getElementById("khohaucan")
+        document.getElementById("login")
         .style.display = "none";
+
+
+
+        /* ẨN MAIN */
+
+        document.getElementById("main")
+        .style.display = "none";
+
+
+
+        /* ẨN MENU */
+
+        document.getElementById("menu")
+        .style.display = "none";
+
+
+
+        /* ẨN THỐNG KÊ */
+
+        document.getElementById("thongke")
+        .style.display = "none";
+
+
+
+        /* KHO HUẤN LUYỆN */
+
+        if(hash == "#khohuanluyen"){
+
+
+
+            document.getElementById("khohuanluyen")
+            .style.display = "block";
+
+
+
+            document.getElementById("khohaucan")
+            .style.display = "none";
+
+        }
+
+
+
+        /* KHO HẬU CẦN */
+
+        else if(hash == "#khohaucan"){
+
+
+
+            document.getElementById("khohuanluyen")
+            .style.display = "none";
+
+
+
+            document.getElementById("khohaucan")
+            .style.display = "block";
+
+        }
 
     }
 
 
 
-    /* QR KHO HẬU CẦN */
+    /* LOAD BÌNH THƯỜNG */
 
-    else if(hash == "#khohaucan"){
+    else{
+
+
+
+        document.getElementById("login")
+        .style.display = "block";
+
+
+
+        document.getElementById("main")
+        .style.display = "none";
+
+
+
+        document.getElementById("menu")
+        .style.display = "none";
 
 
 
@@ -456,7 +505,12 @@ window.onload = function(){
 
 
         document.getElementById("khohaucan")
-        .style.display = "block";
+        .style.display = "none";
+
+
+
+        document.getElementById("thongke")
+        .style.display = "none";
 
     }
 
