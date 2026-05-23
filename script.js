@@ -1,5 +1,3 @@
-/* ĐĂNG NHẬP */
-
 function dangNhap(){
 
 
@@ -13,7 +11,7 @@ function dangNhap(){
 
     if(ten == ""){
 
-        alert("Nhập tên");
+        alert("Vui lòng nhập tên");
 
         return;
 
@@ -28,33 +26,19 @@ function dangNhap(){
 
 
 
-   /* HIỆN MAIN */
+    /* HIỆN MAIN */
 
-document.getElementById("main")
-.style.display = "block";
-
-
-
-/* HIỆN MENU */
+    document.getElementById("main")
+    .style.display = "block";
 
 
 
-    /* ẨN KHO */
+    /* CHÀO */
 
-    document.getElementById("khohuanluyen")
-    .style.display = "none";
+    document.getElementById("chaomung")
+    .innerHTML =
 
-
-
-    document.getElementById("khohaucan")
-    .style.display = "none";
-
-
-
-    /* ẨN THỐNG KÊ */
-
-    document.getElementById("thongke")
-    .style.display = "none";
+    "Xin chào: " + ten;
 
 }
 
@@ -251,8 +235,6 @@ function timKiemHC(){
 
 function moMenu(){
 
-
-
     document.getElementById("menu")
     .style.left = "0";
 
@@ -264,13 +246,10 @@ function moMenu(){
 
 function dongMenu(){
 
-
-
     document.getElementById("menu")
-    .style.left = "-260px";
+    .style.left = "-250px";
 
 }
-
 /* TRANG CHỦ */
 
 function trangChu(){
@@ -495,7 +474,7 @@ window.onload = function(){
 
         }
 
-    }dongMenu();
+    }
 
 
 
@@ -513,6 +492,10 @@ window.onload = function(){
         document.getElementById("main")
         .style.display = "none";
 
+
+
+        document.getElementById("menu")
+        .style.display = "none";
 
 
 
